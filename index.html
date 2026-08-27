@@ -1,1 +1,351 @@
 
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>RSS Widget Generator | SEO Schweiz</title>
+
+  <meta name="description"
+        content="Kostenloser RSS Widget Generator von SEO Schweiz. RSS Feed eingeben, Widget erstellen und aktuelle News automatisch auf Ihrer Website anzeigen.">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5f5f5;
+      color: #181818;
+    }
+
+    header {
+      background: #111;
+      color: white;
+      padding: 28px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+      font-size: 30px;
+    }
+
+    header p {
+      margin: 0;
+      color: #ccc;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 35px auto;
+      padding: 0 20px;
+    }
+
+    .box {
+      background: white;
+      border-radius: 12px;
+      padding: 28px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 18px rgba(0,0,0,.08);
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin: 18px 0 7px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccc;
+      border-radius: 7px;
+      font-size: 16px;
+    }
+
+    .checkbox {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .checkbox input {
+      width: auto;
+    }
+
+    button {
+      margin-top: 22px;
+      padding: 14px 22px;
+      border: 0;
+      border-radius: 7px;
+      background: #e30613;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: .88;
+    }
+
+    #preview {
+      border: 1px dashed #aaa;
+      padding: 20px;
+      min-height: 100px;
+      border-radius: 8px;
+      background: #fafafa;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 100px;
+      padding: 14px;
+      border: 1px solid #ccc;
+      border-radius: 7px;
+      font-family: monospace;
+      font-size: 14px;
+      resize: vertical;
+    }
+
+    .info {
+      color: #666;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      color: #777;
+      font-size: 14px;
+    }
+
+    footer a {
+      color: #333;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>RSS Widget Generator</h1>
+  <p>RSS Feeds automatisch auf Ihrer Website anzeigen</p>
+</header>
+
+<main class="container">
+
+  <section class="box">
+
+    <h2>RSS Widget erstellen</h2>
+
+    <label for="rssUrl">RSS Feed URL</label>
+
+    <input
+      id="rssUrl"
+      type="url"
+      placeholder="https://example.com/feed.xml"
+    >
+
+    <label for="count">Anzahl Beiträge</label>
+
+    <select id="count">
+      <option value="3">3 Beiträge</option>
+      <option value="5" selected>5 Beiträge</option>
+      <option value="10">10 Beiträge</option>
+      <option value="15">15 Beiträge</option>
+    </select>
+
+    <div class="checkbox">
+      <input id="showTitle" type="checkbox" checked>
+      <label for="showTitle">Titel anzeigen</label>
+    </div>
+
+    <div class="checkbox">
+      <input id="showDate" type="checkbox" checked>
+      <label for="showDate">Datum anzeigen</label>
+    </div>
+
+    <div class="checkbox">
+      <input id="newTab" type="checkbox" checked>
+      <label for="newTab">Links in neuem Tab öffnen</label>
+    </div>
+
+    <button id="generateButton">
+      Widget erstellen
+    </button>
+
+  </section>
+
+  <section class="box">
+
+    <h2>Embed Code</h2>
+
+    <p class="info">
+      Diesen Code später auf der gewünschten Website einfügen.
+    </p>
+
+    <textarea
+      id="embedCode"
+      readonly
+      placeholder="Der fertige Widget-Code erscheint hier..."
+    ></textarea>
+
+    <button id="copyButton">
+      Code kopieren
+    </button>
+
+  </section>
+
+  <section class="box">
+
+    <h2>Vorschau</h2>
+
+    <div id="preview">
+      Hier erscheint die Vorschau Ihres RSS Widgets.
+    </div>
+
+  </section>
+
+  <section class="box">
+
+    <h2>Was ist ein RSS Widget?</h2>
+
+    <p class="info">
+      Mit einem RSS Widget können aktuelle Nachrichten,
+      Blogbeiträge oder andere RSS-Inhalte automatisch auf
+      einer Website angezeigt werden.
+    </p>
+
+    <p class="info">
+      Sobald der RSS Feed neue Inhalte veröffentlicht,
+      können diese automatisch über das Widget auf der
+      eingebundenen Website erscheinen.
+    </p>
+
+  </section>
+
+</main>
+
+<footer>
+
+  RSS Widget Generator ·
+  <a href="https://www.seoschweiz.net/"
+     target="_blank"
+     rel="noopener">
+     SEO Schweiz
+  </a>
+
+</footer>
+
+<script>
+
+const rssInput = document.getElementById("rssUrl");
+const countInput = document.getElementById("count");
+const showTitle = document.getElementById("showTitle");
+const showDate = document.getElementById("showDate");
+const newTab = document.getElementById("newTab");
+
+const embedCode = document.getElementById("embedCode");
+const preview = document.getElementById("preview");
+
+document
+  .getElementById("generateButton")
+  .addEventListener("click", generateWidget);
+
+document
+  .getElementById("copyButton")
+  .addEventListener("click", copyCode);
+
+
+function generateWidget() {
+
+  const rss = rssInput.value.trim();
+
+  if (!rss) {
+    alert("Bitte zuerst eine RSS Feed URL eingeben.");
+    return;
+  }
+
+  try {
+    new URL(rss);
+  } catch {
+    alert("Bitte eine gültige RSS URL eingeben.");
+    return;
+  }
+
+  const params = new URLSearchParams();
+
+  params.set("feed", rss);
+  params.set("count", countInput.value);
+  params.set("title", showTitle.checked ? "1" : "0");
+  params.set("date", showDate.checked ? "1" : "0");
+  params.set("newtab", newTab.checked ? "1" : "0");
+
+  const scriptURL =
+    "https://tools.seoschweiz.net/rss-widget-generator/widget.js?" +
+    params.toString();
+
+  const code =
+    '<script src="' +
+    scriptURL +
+    '"><\/script>';
+
+  embedCode.value = code;
+
+  preview.innerHTML =
+    "<strong>Widget-Code erstellt.</strong><br><br>" +
+    "Im nächsten Schritt verbinden wir diesen Generator " +
+    "mit dem eigentlichen RSS Widget.";
+
+}
+
+
+async function copyCode() {
+
+  if (!embedCode.value) {
+    alert("Bitte zuerst ein Widget erstellen.");
+    return;
+  }
+
+  try {
+
+    await navigator.clipboard.writeText(embedCode.value);
+
+    const button =
+      document.getElementById("copyButton");
+
+    const original = button.textContent;
+
+    button.textContent = "✓ Kopiert";
+
+    setTimeout(() => {
+      button.textContent = original;
+    }, 1800);
+
+  } catch {
+
+    embedCode.select();
+    document.execCommand("copy");
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>
