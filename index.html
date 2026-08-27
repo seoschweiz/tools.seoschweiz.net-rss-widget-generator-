@@ -1,16 +1,23 @@
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>RSS Widget Generator | SEO Schweiz</title>
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>SEO Friendly RSS Widget Generator | SEO Schweiz</title>
 
   <meta name="description"
-        content="Kostenloser RSS Widget Generator von SEO Schweiz. RSS Feed eingeben, Widget erstellen und aktuelle News automatisch auf Ihrer Website anzeigen.">
+        content="Kostenloser SEO Friendly RSS Widget Generator. RSS Feed einfügen, automatisches News Widget erstellen und mit optionalem SEO Link auf jeder Website einbinden.">
+
+  <meta name="robots" content="index,follow">
+
+  <link rel="canonical"
+        href="https://seoschweiz.github.io/tools.seoschweiz.net-rss-widget-generator-/">
 
   <style>
+
     * {
       box-sizing: border-box;
     }
@@ -20,18 +27,19 @@
       font-family: Arial, Helvetica, sans-serif;
       background: #f5f5f5;
       color: #181818;
+      line-height: 1.5;
     }
 
     header {
       background: #111;
       color: white;
-      padding: 28px 20px;
+      padding: 35px 20px;
       text-align: center;
     }
 
     header h1 {
       margin: 0 0 8px;
-      font-size: 30px;
+      font-size: 32px;
     }
 
     header p {
@@ -64,12 +72,20 @@
     }
 
     input,
-    select {
+    select,
+    textarea {
       width: 100%;
       padding: 13px;
       border: 1px solid #ccc;
       border-radius: 7px;
       font-size: 16px;
+    }
+
+    textarea {
+      min-height: 150px;
+      font-family: monospace;
+      font-size: 13px;
+      resize: vertical;
     }
 
     .checkbox {
@@ -81,6 +97,10 @@
 
     .checkbox input {
       width: auto;
+    }
+
+    .checkbox label {
+      margin: 0;
     }
 
     button {
@@ -99,34 +119,35 @@
       opacity: .88;
     }
 
+    .info {
+      color: #666;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .seo-info {
+      padding: 15px;
+      background: #f6f6f6;
+      border-left: 4px solid #e30613;
+      margin-top: 20px;
+      font-size: 14px;
+    }
+
     #preview {
-      border: 1px dashed #aaa;
-      padding: 20px;
       min-height: 100px;
+      border: 1px dashed #aaa;
       border-radius: 8px;
+      padding: 20px;
       background: #fafafa;
     }
 
-    textarea {
-      width: 100%;
-      min-height: 100px;
-      padding: 14px;
-      border: 1px solid #ccc;
-      border-radius: 7px;
-      font-family: monospace;
-      font-size: 14px;
-      resize: vertical;
-    }
-
-    .info {
-      color: #666;
-      line-height: 1.6;
-      font-size: 14px;
+    #preview iframe {
+      display: block;
     }
 
     footer {
       text-align: center;
-      padding: 30px 20px;
+      padding: 35px 20px;
       color: #777;
       font-size: 14px;
     }
@@ -136,14 +157,22 @@
       text-decoration: none;
       font-weight: bold;
     }
+
   </style>
+
 </head>
 
 <body>
 
 <header>
-  <h1>RSS Widget Generator</h1>
-  <p>RSS Feeds automatisch auf Ihrer Website anzeigen</p>
+
+  <h1>SEO Friendly RSS Widget Generator</h1>
+
+  <p>
+    Automatische RSS News Widgets für Websites,
+    Blogs und Blogger erstellen
+  </p>
+
 </header>
 
 <main class="container">
@@ -152,57 +181,186 @@
 
     <h2>RSS Widget erstellen</h2>
 
-    <label for="rssUrl">RSS Feed URL</label>
+    <label for="rssUrl">
+      RSS Feed URL
+    </label>
 
     <input
       id="rssUrl"
       type="url"
-      placeholder="https://example.com/feed.xml"
-    >
+      placeholder="https://example.com/feed.xml">
 
-    <label for="count">Anzahl Beiträge</label>
+    <label for="count">
+      Anzahl der Beiträge
+    </label>
 
     <select id="count">
-      <option value="3">3 Beiträge</option>
-      <option value="5" selected>5 Beiträge</option>
-      <option value="10">10 Beiträge</option>
-      <option value="15">15 Beiträge</option>
+
+      <option value="3">
+        3 Beiträge
+      </option>
+
+      <option value="5" selected>
+        5 Beiträge
+      </option>
+
+      <option value="10">
+        10 Beiträge
+      </option>
+
+      <option value="15">
+        15 Beiträge
+      </option>
+
     </select>
 
-    <div class="checkbox">
-      <input id="showTitle" type="checkbox" checked>
-      <label for="showTitle">Titel anzeigen</label>
-    </div>
+
+    <label for="height">
+      Widget Höhe
+    </label>
+
+    <select id="height">
+
+      <option value="450">
+        450 Pixel
+      </option>
+
+      <option value="650" selected>
+        650 Pixel
+      </option>
+
+      <option value="850">
+        850 Pixel
+      </option>
+
+      <option value="1100">
+        1100 Pixel
+      </option>
+
+      <option value="1400">
+        1400 Pixel
+      </option>
+
+    </select>
+
 
     <div class="checkbox">
-      <input id="showDate" type="checkbox" checked>
-      <label for="showDate">Datum anzeigen</label>
+
+      <input
+        id="showTitle"
+        type="checkbox"
+        checked>
+
+      <label for="showTitle">
+        Feed Titel anzeigen
+      </label>
+
     </div>
 
+
     <div class="checkbox">
-      <input id="newTab" type="checkbox" checked>
-      <label for="newTab">Links in neuem Tab öffnen</label>
+
+      <input
+        id="showDate"
+        type="checkbox"
+        checked>
+
+      <label for="showDate">
+        Datum anzeigen
+      </label>
+
     </div>
+
+
+    <div class="checkbox">
+
+      <input
+        id="newTab"
+        type="checkbox"
+        checked>
+
+      <label for="newTab">
+        Links in neuem Tab öffnen
+      </label>
+
+    </div>
+
+  </section>
+
+
+  <section class="box">
+
+    <h2>SEO Einstellungen</h2>
+
+    <div class="checkbox">
+
+      <input
+        id="seoLink"
+        type="checkbox"
+        checked>
+
+      <label for="seoLink">
+        SEO Link unter dem Widget hinzufügen
+      </label>
+
+    </div>
+
+
+    <label for="seoUrl">
+      Ziel URL
+    </label>
+
+    <input
+      id="seoUrl"
+      type="url"
+      placeholder="https://example.com/news/">
+
+
+    <label for="anchorText">
+      SEO Anchor Text
+    </label>
+
+    <input
+      id="anchorText"
+      type="text"
+      placeholder="Aktuelle SEO News Schweiz">
+
+
+    <div class="seo-info">
+
+      Der optionale SEO Link wird außerhalb des
+      iframe eingebunden.
+
+      Dadurch befindet sich der Link direkt im HTML
+      der Website, auf der das Widget installiert wird.
+
+      Verwenden Sie einen natürlichen und thematisch
+      passenden Linktext.
+
+    </div>
+
 
     <button id="generateButton">
-      Widget erstellen
+      SEO Widget erstellen
     </button>
 
   </section>
+
 
   <section class="box">
 
     <h2>Embed Code</h2>
 
     <p class="info">
-      Diesen Code später auf der gewünschten Website einfügen.
+      Kopieren Sie diesen Code und fügen Sie ihn
+      in Ihre Website oder Ihr Blogger HTML Gadget ein.
     </p>
 
     <textarea
       id="embedCode"
       readonly
-      placeholder="Der fertige Widget-Code erscheint hier..."
-    ></textarea>
+      placeholder="Ihr fertiger Widget Code erscheint hier...">
+    </textarea>
 
     <button id="copyButton">
       Code kopieren
@@ -210,136 +368,373 @@
 
   </section>
 
+
   <section class="box">
 
     <h2>Vorschau</h2>
 
     <div id="preview">
-      Hier erscheint die Vorschau Ihres RSS Widgets.
+      Hier erscheint Ihr RSS Widget.
     </div>
 
   </section>
 
+
   <section class="box">
 
-    <h2>Was ist ein RSS Widget?</h2>
+    <h2>SEO Friendly RSS Widgets</h2>
 
     <p class="info">
-      Mit einem RSS Widget können aktuelle Nachrichten,
-      Blogbeiträge oder andere RSS-Inhalte automatisch auf
-      einer Website angezeigt werden.
+
+      RSS Widgets ermöglichen es, aktuelle Nachrichten,
+      Blogbeiträge oder andere Feed Inhalte automatisch
+      auf externen Websites anzuzeigen.
+
     </p>
 
     <p class="info">
-      Sobald der RSS Feed neue Inhalte veröffentlicht,
-      können diese automatisch über das Widget auf der
-      eingebundenen Website erscheinen.
+
+      Neue Beiträge werden über den RSS Feed automatisch
+      im Widget aktualisiert. Die Website muss dafür nicht
+      jedes Mal manuell bearbeitet werden.
+
+    </p>
+
+    <p class="info">
+
+      Zusätzlich kann ein normaler HTML Link außerhalb
+      des RSS iframe eingebunden werden. Dadurch kann
+      eine relevante News Seite direkt von der
+      einbettenden Website verlinkt werden.
+
     </p>
 
   </section>
 
 </main>
 
+
 <footer>
 
-  RSS Widget Generator ·
-  <a href="https://www.seoschweiz.net/"
-     target="_blank"
-     rel="noopener">
-     SEO Schweiz
+  SEO Friendly RSS Widget Generator ·
+
+  <a
+    href="https://www.seoschweiz.net/"
+    target="_blank"
+    rel="noopener">
+
+    SEO Schweiz
+
   </a>
 
 </footer>
 
+
 <script>
 
-const rssInput = document.getElementById("rssUrl");
-const countInput = document.getElementById("count");
-const showTitle = document.getElementById("showTitle");
-const showDate = document.getElementById("showDate");
-const newTab = document.getElementById("newTab");
+const rssUrl =
+  document.getElementById("rssUrl");
 
-const embedCode = document.getElementById("embedCode");
-const preview = document.getElementById("preview");
+const count =
+  document.getElementById("count");
+
+const height =
+  document.getElementById("height");
+
+const showTitle =
+  document.getElementById("showTitle");
+
+const showDate =
+  document.getElementById("showDate");
+
+const newTab =
+  document.getElementById("newTab");
+
+const seoLink =
+  document.getElementById("seoLink");
+
+const seoUrl =
+  document.getElementById("seoUrl");
+
+const anchorText =
+  document.getElementById("anchorText");
+
+const embedCode =
+  document.getElementById("embedCode");
+
+const preview =
+  document.getElementById("preview");
+
 
 document
   .getElementById("generateButton")
-  .addEventListener("click", generateWidget);
+  .addEventListener(
+    "click",
+    generateWidget
+  );
+
 
 document
   .getElementById("copyButton")
-  .addEventListener("click", copyCode);
+  .addEventListener(
+    "click",
+    copyCode
+  );
+
+
+function escapeHtml(text) {
+
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
+}
 
 
 function generateWidget() {
 
-  const rss = rssInput.value.trim();
+  const feed =
+    rssUrl.value.trim();
 
-  if (!rss) {
-    alert("Bitte zuerst eine RSS Feed URL eingeben.");
+  if (!feed) {
+
+    alert(
+      "Bitte zuerst eine RSS Feed URL eingeben."
+    );
+
     return;
+
   }
+
 
   try {
-    new URL(rss);
+
+    new URL(feed);
+
   } catch {
-    alert("Bitte eine gültige RSS URL eingeben.");
+
+    alert(
+      "Bitte eine gültige RSS Feed URL eingeben."
+    );
+
     return;
+
   }
 
-  const params = new URLSearchParams();
 
-  params.set("feed", rss);
-  params.set("count", countInput.value);
-  params.set("title", showTitle.checked ? "1" : "0");
-  params.set("date", showDate.checked ? "1" : "0");
-  params.set("newtab", newTab.checked ? "1" : "0");
+  const params =
+    new URLSearchParams();
 
-  const scriptURL =
-    "https://tools.seoschweiz.net/rss-widget-generator/widget.js?" +
+  params.set(
+    "feed",
+    feed
+  );
+
+  params.set(
+    "count",
+    count.value
+  );
+
+  params.set(
+    "title",
+    showTitle.checked ? "1" : "0"
+  );
+
+  params.set(
+    "date",
+    showDate.checked ? "1" : "0"
+  );
+
+  params.set(
+    "newtab",
+    newTab.checked ? "1" : "0"
+  );
+
+
+  const widgetUrl =
+    "https://seoschweiz.github.io/" +
+    "tools.seoschweiz.net-rss-widget-generator-/" +
+    "widget.html?" +
     params.toString();
 
-  const code =
-    '<script src="' +
-    scriptURL +
-    '"><\/script>';
 
-  embedCode.value = code;
+  let code =
+`<iframe
+  src="${widgetUrl.replace(/&/g, "&amp;")}"
+  width="100%"
+  height="${height.value}"
+  title="RSS News Widget"
+  style="border:0;width:100%;overflow:hidden;"
+  scrolling="no"
+  loading="lazy">
+</iframe>`;
 
-  preview.innerHTML =
-    "<strong>Widget-Code erstellt.</strong><br><br>" +
-    "Im nächsten Schritt verbinden wir diesen Generator " +
-    "mit dem eigentlichen RSS Widget.";
+
+  if (seoLink.checked) {
+
+    const target =
+      seoUrl.value.trim();
+
+    const anchor =
+      anchorText.value.trim();
+
+
+    if (target && anchor) {
+
+      try {
+
+        new URL(target);
+
+        code +=
+`
+
+<p class="rss-widget-seo-link">
+  <a
+    href="${escapeHtml(target)}"
+    target="_blank"
+    rel="noopener">
+    ${escapeHtml(anchor)}
+  </a>
+</p>`;
+
+      } catch {
+
+        alert(
+          "Die SEO Ziel URL ist ungültig."
+        );
+
+        return;
+
+      }
+
+    }
+
+  }
+
+
+  embedCode.value =
+    code;
+
+
+  preview.innerHTML = "";
+
+
+  const iframe =
+    document.createElement("iframe");
+
+  iframe.src =
+    widgetUrl;
+
+  iframe.width =
+    "100%";
+
+  iframe.height =
+    height.value;
+
+  iframe.style.border =
+    "0";
+
+  iframe.setAttribute(
+    "scrolling",
+    "no"
+  );
+
+  iframe.title =
+    "RSS News Widget";
+
+  preview.appendChild(
+    iframe
+  );
+
+
+  if (
+    seoLink.checked &&
+    seoUrl.value.trim() &&
+    anchorText.value.trim()
+  ) {
+
+    const paragraph =
+      document.createElement("p");
+
+    const link =
+      document.createElement("a");
+
+    link.href =
+      seoUrl.value.trim();
+
+    link.textContent =
+      anchorText.value.trim();
+
+    link.target =
+      "_blank";
+
+    link.rel =
+      "noopener";
+
+    paragraph.appendChild(
+      link
+    );
+
+    preview.appendChild(
+      paragraph
+    );
+
+  }
 
 }
 
 
 async function copyCode() {
 
-  if (!embedCode.value) {
-    alert("Bitte zuerst ein Widget erstellen.");
+  if (!embedCode.value.trim()) {
+
+    alert(
+      "Bitte zuerst ein Widget erstellen."
+    );
+
     return;
+
   }
+
 
   try {
 
-    await navigator.clipboard.writeText(embedCode.value);
+    await navigator.clipboard.writeText(
+      embedCode.value
+    );
+
 
     const button =
-      document.getElementById("copyButton");
+      document.getElementById(
+        "copyButton"
+      );
 
-    const original = button.textContent;
 
-    button.textContent = "✓ Kopiert";
+    button.textContent =
+      "✓ Code kopiert";
 
-    setTimeout(() => {
-      button.textContent = original;
-    }, 1800);
+
+    setTimeout(
+      function() {
+
+        button.textContent =
+          "Code kopieren";
+
+      },
+      1800
+    );
+
 
   } catch {
 
     embedCode.select();
-    document.execCommand("copy");
+
+    document.execCommand(
+      "copy"
+    );
 
   }
 
