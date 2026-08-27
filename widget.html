@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: #111;
+      line-height: 1.5;
+    }
+
+    #rss-widget {
+      width: 100%;
+    }
+
+    .rss-title {
+      margin: 0 0 14px;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .rss-item {
+      padding: 11px 0;
+      border-bottom: 1px solid #e5e5e5;
+    }
+
+    .rss-item:last-child {
+      border-bottom: 0;
+    }
+
+    .rss-item a {
+      color: #111;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .rss-item a:hover {
+      text-decoration: underline;
+    }
+
+    .rss-date {
+      margin-top: 4px;
+      color: #777;
+      font-size: 13px;
+    }
+
+    .rss-message {
+      padding: 12px;
+      background: #f5f5f5;
+      border-radius: 6px;
+      color: #555;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="rss-widget">
+  <div class="rss-message">RSS Feed wird geladen...</div>
+</div>
+
+<script>
+(function () {
+
+  const container = document.getElementById("rss-widget");
+
+  const params = new URLSearchParams(window.location.search);
+
+  const feedUrl = params.get("feed");
+
+  let count = parseInt(params.get("count") || "5", 10);
+
+  if (isNaN(count)) {
+    count = 5;
+  }
+
+  count = Math.max(1, Math.min(count, 15));
+
+  const showTitle = params.get("title") !== "0";
+  const showDate = params.get("date") !== "0";
+  const newTab = params.get("newtab") !== "0";
+
+  if (!feedUrl) {
+    container.innerHTML =
+      '<div class="rss-message">Kein RSS Feed angegeben.</div>';
+    return;
+  }
+
+  const apiUrl =
+    "https://api.rss2json.com/v1/api.json?rss_url=" +
+    encodeURIComponent(feedUrl);
+
+  fetch(apiUrl)
+    .then(function(response) {
+
+      if (!response.ok) {
+        throw new Error("HTTP " + response.status);
+      }
+
+      return response.json();
+
+    })
+    .then(function(data) {
+
+      if (!data || !Array.isArray(data.items)) {
+        throw new Error("Ungültige RSS Daten");
+      }
+
+      container.innerHTML = "";
+
+      if (
+        showTitle &&
+        data.feed &&
+        data.feed.title
+      ) {
+
+        const title = document.createElement("div");
+
+        title.className = "rss-title";
+        title.textContent = data.feed.title;
+
+        container.appendChild(title);
+      }
+
+      const items = data.items.slice(0, count);
+
+      if (!items.length) {
+        container.innerHTML =
+          '<div class="rss-message">Keine Beiträge gefunden.</div>';
+        return;
+      }
+
+      items.forEach(function(item) {
+
+        const article = document.createElement("div");
+        article.className = "rss-item";
+
+        const link = document.createElement("a");
+
+        link.href = item.link || feedUrl;
+        link.textContent = item.title || "Artikel";
+
+        if (newTab) {
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+        }
+
+        article.appendChild(link);
+
+        if (showDate && item.pubDate) {
+
+          const parsedDate = new Date(item.pubDate);
+
+          if (!isNaN(parsedDate.getTime())) {
+
+            const date = document.createElement("div");
+
+            date.className = "rss-date";
+
+            date.textContent =
+              parsedDate.toLocaleDateString("de-DE");
+
+            article.appendChild(date);
+          }
+        }
+
+        container.appendChild(article);
+      });
+
+    })
+    .catch(function(error) {
+
+      console.error("RSS Widget:", error);
+
+      container.innerHTML =
+        '<div class="rss-message">' +
+        'RSS Feed konnte nicht geladen werden.' +
+        '</div>';
+
+    });
+
+})();
+</script>
+
+</body>
+</html>
