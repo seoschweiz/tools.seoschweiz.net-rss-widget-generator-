@@ -1,15 +1,715 @@
-<p class="rss-widget-seo-link">
-  <a href="SEO-ZIEL-URL" target="_blank" rel="noopener">
-    SEO-ANCHOR-TEXT
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>SEO Friendly RSS Widget Generator | SEO Schweiz</title>
+
+  <meta name="description"
+        content="Kostenloser SEO Friendly RSS Widget Generator. RSS Feed eingeben, automatisches News Widget erstellen und mit optionalem SEO Link auf Websites und Blogs einbinden.">
+
+  <meta name="robots" content="index,follow">
+
+  <link rel="canonical"
+        href="https://seoschweiz.github.io/tools.seoschweiz.net-rss-widget-generator-/">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5f5f5;
+      color: #181818;
+      line-height: 1.5;
+    }
+
+    header {
+      background: #111;
+      color: #fff;
+      padding: 36px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+      font-size: 32px;
+    }
+
+    header p {
+      margin: 0;
+      color: #ccc;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 35px auto;
+      padding: 0 20px;
+    }
+
+    .box {
+      background: #fff;
+      border-radius: 12px;
+      padding: 28px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 18px rgba(0,0,0,.08);
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    label {
+      display: block;
+      font-weight: 700;
+      margin: 18px 0 7px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccc;
+      border-radius: 7px;
+      font-size: 16px;
+    }
+
+    textarea {
+      min-height: 210px;
+      font-family: monospace;
+      font-size: 13px;
+      resize: vertical;
+    }
+
+    .checkbox {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .checkbox input {
+      width: auto;
+    }
+
+    .checkbox label {
+      margin: 0;
+    }
+
+    button {
+      margin-top: 22px;
+      padding: 14px 22px;
+      border: 0;
+      border-radius: 7px;
+      background: #e30613;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: .88;
+    }
+
+    .info {
+      color: #666;
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .seo-info {
+      padding: 15px;
+      background: #f6f6f6;
+      border-left: 4px solid #e30613;
+      margin-top: 20px;
+      font-size: 14px;
+    }
+
+    #preview {
+      min-height: 100px;
+      border: 1px dashed #aaa;
+      border-radius: 8px;
+      padding: 20px;
+      background: #fafafa;
+    }
+
+    .preview-seo-link {
+      margin: 0 0 18px;
+    }
+
+    .preview-seo-link a {
+      font-weight: 700;
+    }
+
+    #preview iframe {
+      display: block;
+      width: 100%;
+      border: 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 35px 20px;
+      color: #777;
+      font-size: 14px;
+    }
+
+    footer a {
+      color: #333;
+      text-decoration: none;
+      font-weight: 700;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>SEO Friendly RSS Widget Generator</h1>
+  <p>Automatische RSS Widgets für Websites, Blogs und Blogger</p>
+</header>
+
+<main class="container">
+
+  <section class="box">
+
+    <h2>1. RSS Feed</h2>
+
+    <label for="rssUrl">RSS Feed URL</label>
+
+    <input
+      id="rssUrl"
+      type="url"
+      placeholder="https://example.com/feed.xml">
+
+    <label for="count">Anzahl der Beiträge</label>
+
+    <select id="count">
+      <option value="3">3 Beiträge</option>
+      <option value="5" selected>5 Beiträge</option>
+      <option value="10">10 Beiträge</option>
+      <option value="15">15 Beiträge</option>
+    </select>
+
+    <label for="height">Widget Höhe</label>
+
+    <select id="height">
+      <option value="350">350 Pixel</option>
+      <option value="450">450 Pixel</option>
+      <option value="550">550 Pixel</option>
+      <option value="650" selected>650 Pixel</option>
+      <option value="850">850 Pixel</option>
+      <option value="1100">1100 Pixel</option>
+      <option value="1400">1400 Pixel</option>
+    </select>
+
+    <div class="checkbox">
+      <input id="showTitle" type="checkbox" checked>
+      <label for="showTitle">Feed Titel anzeigen</label>
+    </div>
+
+    <div class="checkbox">
+      <input id="showDate" type="checkbox" checked>
+      <label for="showDate">Datum anzeigen</label>
+    </div>
+
+    <div class="checkbox">
+      <input id="newTab" type="checkbox" checked>
+      <label for="newTab">Links in neuem Tab öffnen</label>
+    </div>
+
+  </section>
+
+
+  <section class="box">
+
+    <h2>2. SEO Link</h2>
+
+    <div class="checkbox">
+      <input id="seoLink" type="checkbox" checked>
+      <label for="seoLink">SEO Link vor dem Widget hinzufügen</label>
+    </div>
+
+    <label for="seoUrl">SEO Ziel URL</label>
+
+    <input
+      id="seoUrl"
+      type="url"
+      placeholder="https://example.com/">
+
+    <label for="anchorText">SEO Anchor Text</label>
+
+    <input
+      id="anchorText"
+      type="text"
+      placeholder="Aktuelle News">
+
+    <div class="seo-info">
+      <strong>SEO Friendly:</strong>
+      Der optionale Link wird vor dem RSS Widget als normaler
+      HTML-Link eingebunden. Er liegt damit direkt im HTML
+      der Website und nicht innerhalb des iframe.
+    </div>
+
+    <button id="generateButton">
+      SEO Widget erstellen
+    </button>
+
+  </section>
+
+
+  <section class="box">
+
+    <h2>3. Fertiger Embed Code</h2>
+
+    <p class="info">
+      Den kompletten Code kopieren und beispielsweise in
+      ein Blogger HTML/JavaScript-Gadget einfügen.
+    </p>
+
+    <textarea
+      id="embedCode"
+      readonly
+      placeholder="Ihr fertiger Widget Code erscheint hier..."></textarea>
+
+    <button id="copyButton">
+      Code kopieren
+    </button>
+
+  </section>
+
+
+  <section class="box">
+
+    <h2>Vorschau</h2>
+
+    <div id="preview">
+      Hier erscheint Ihr RSS Widget.
+    </div>
+
+  </section>
+
+
+  <section class="box">
+
+    <h2>Was ist ein SEO Friendly RSS Widget?</h2>
+
+    <p class="info">
+      Mit diesem RSS Widget Generator können aktuelle
+      Nachrichten, Blogbeiträge und andere RSS-Inhalte
+      automatisch auf Websites und Blogs angezeigt werden.
+    </p>
+
+    <p class="info">
+      Sobald der RSS Feed neue Beiträge enthält, erscheinen
+      die neuen Inhalte automatisch im eingebundenen Widget.
+      Der Embed Code muss dafür nicht erneut geändert werden.
+    </p>
+
+    <p class="info">
+      Zusätzlich kann vor dem Widget ein normaler HTML-Link
+      mit frei wählbarer Zieladresse und frei wählbarem
+      Anchor Text eingebunden werden.
+    </p>
+
+  </section>
+
+</main>
+
+
+<footer>
+  SEO Friendly RSS Widget Generator ·
+  <a
+    href="https://www.seoschweiz.net/"
+    target="_blank"
+    rel="noopener">
+    SEO Schweiz
+  </a>
+</footer>
+
+
+<script>
+(function () {
+
+  "use strict";
+
+  const rssUrl = document.getElementById("rssUrl");
+  const count = document.getElementById("count");
+  const height = document.getElementById("height");
+
+  const showTitle = document.getElementById("showTitle");
+  const showDate = document.getElementById("showDate");
+  const newTab = document.getElementById("newTab");
+
+  const seoLink = document.getElementById("seoLink");
+  const seoUrl = document.getElementById("seoUrl");
+  const anchorText = document.getElementById("anchorText");
+
+  const embedCode = document.getElementById("embedCode");
+  const preview = document.getElementById("preview");
+
+  const generateButton =
+    document.getElementById("generateButton");
+
+  const copyButton =
+    document.getElementById("copyButton");
+
+
+  generateButton.addEventListener(
+    "click",
+    generateWidget
+  );
+
+  copyButton.addEventListener(
+    "click",
+    copyCode
+  );
+
+
+  function escapeHtml(text) {
+
+    return String(text)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+
+  }
+
+
+  function validUrl(value) {
+
+    try {
+
+      const url = new URL(value);
+
+      return (
+        url.protocol === "http:" ||
+        url.protocol === "https:"
+      );
+
+    } catch {
+
+      return false;
+
+    }
+
+  }
+
+
+  function generateWidget() {
+
+    const feed =
+      rssUrl.value.trim();
+
+
+    if (!feed) {
+
+      alert(
+        "Bitte zuerst eine RSS Feed URL eingeben."
+      );
+
+      return;
+
+    }
+
+
+    if (!validUrl(feed)) {
+
+      alert(
+        "Bitte eine gültige RSS Feed URL eingeben."
+      );
+
+      return;
+
+    }
+
+
+    const params =
+      new URLSearchParams();
+
+
+    params.set(
+      "feed",
+      feed
+    );
+
+    params.set(
+      "count",
+      count.value
+    );
+
+    params.set(
+      "title",
+      showTitle.checked ? "1" : "0"
+    );
+
+    params.set(
+      "date",
+      showDate.checked ? "1" : "0"
+    );
+
+    params.set(
+      "newtab",
+      newTab.checked ? "1" : "0"
+    );
+
+
+    const widgetUrl =
+      "https://seoschweiz.github.io/" +
+      "tools.seoschweiz.net-rss-widget-generator-/" +
+      "widget.html?" +
+      params.toString();
+
+
+    let seoCode = "";
+
+
+    if (seoLink.checked) {
+
+      const target =
+        seoUrl.value.trim();
+
+      const anchor =
+        anchorText.value.trim();
+
+
+      if (!target) {
+
+        alert(
+          "Bitte eine SEO Ziel URL eingeben."
+        );
+
+        return;
+
+      }
+
+
+      if (!validUrl(target)) {
+
+        alert(
+          "Bitte eine gültige SEO Ziel URL eingeben."
+        );
+
+        return;
+
+      }
+
+
+      if (!anchor) {
+
+        alert(
+          "Bitte einen SEO Anchor Text eingeben."
+        );
+
+        return;
+
+      }
+
+
+      /*
+       * WICHTIG:
+       * Der SEO Link wird bewusst VOR
+       * dem iframe erzeugt.
+       */
+
+      seoCode =
+`<p class="rss-widget-seo-link">
+  <a
+    href="${escapeHtml(target)}"
+    target="_blank"
+    rel="noopener">
+    ${escapeHtml(anchor)}
   </a>
 </p>
 
-<iframe
-  src="WIDGET-URL"
+`;
+
+    }
+
+
+    const iframeCode =
+`<iframe
+  src="${widgetUrl.replace(/&/g, "&amp;")}"
   width="100%"
-  height="650"
+  height="${height.value}"
   title="RSS News Widget"
   style="border:0;width:100%;overflow:hidden;"
   scrolling="no"
   loading="lazy">
-</iframe>
+</iframe>`;
+
+
+    /*
+     * NICHT ÄNDERN:
+     *
+     * SEO LINK
+     * zuerst
+     *
+     * IFRAME
+     * danach
+     */
+
+    const finalCode =
+      seoCode +
+      iframeCode;
+
+
+    embedCode.value =
+      finalCode;
+
+
+    createPreview(
+      widgetUrl
+    );
+
+  }
+
+
+  function createPreview(widgetUrl) {
+
+    preview.innerHTML = "";
+
+
+    /*
+     * Auch in der Vorschau:
+     * SEO Link zuerst.
+     */
+
+    if (seoLink.checked) {
+
+      const paragraph =
+        document.createElement("p");
+
+      paragraph.className =
+        "preview-seo-link";
+
+
+      const link =
+        document.createElement("a");
+
+
+      link.href =
+        seoUrl.value.trim();
+
+      link.textContent =
+        anchorText.value.trim();
+
+      link.target =
+        "_blank";
+
+      link.rel =
+        "noopener";
+
+
+      paragraph.appendChild(
+        link
+      );
+
+
+      preview.appendChild(
+        paragraph
+      );
+
+    }
+
+
+    const iframe =
+      document.createElement("iframe");
+
+
+    iframe.src =
+      widgetUrl;
+
+    iframe.width =
+      "100%";
+
+    iframe.height =
+      height.value;
+
+    iframe.title =
+      "RSS News Widget";
+
+    iframe.style.border =
+      "0";
+
+    iframe.style.width =
+      "100%";
+
+    iframe.setAttribute(
+      "scrolling",
+      "no"
+    );
+
+
+    preview.appendChild(
+      iframe
+    );
+
+  }
+
+
+  async function copyCode() {
+
+    const code =
+      embedCode.value.trim();
+
+
+    if (!code) {
+
+      alert(
+        "Bitte zuerst ein Widget erstellen."
+      );
+
+      return;
+
+    }
+
+
+    try {
+
+      await navigator.clipboard.writeText(
+        embedCode.value
+      );
+
+
+      copyButton.textContent =
+        "✓ Code kopiert";
+
+
+      setTimeout(
+        function () {
+
+          copyButton.textContent =
+            "Code kopieren";
+
+        },
+        1800
+      );
+
+
+    } catch {
+
+      embedCode.focus();
+
+      embedCode.select();
+
+      document.execCommand(
+        "copy"
+      );
+
+    }
+
+  }
+
+})();
+</script>
+
+</body>
+</html>
